@@ -32,7 +32,7 @@ const CONFIG = {
     galeri: [
       "foto/EDIT-98.jpg", "foto/EDIT-107.jpg", "foto/EDIT-132.jpg",
       "foto/EDIT-133.jpg", "foto/EDIT-153.jpg", "foto/EDIT-168.jpg",
-      "foto/EDIT-193.jpg","foto/EDIT.jpg","foto/EDIT-91.jpg"
+      "foto/EDIT-193.jpg","foto/EDIT.jpg",
     ]
   },
 
