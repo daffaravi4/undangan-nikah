@@ -242,3 +242,93 @@ body.locked .nav { display: none; }
   html { scroll-behavior: auto; }
   .door, .cover-inner, .btn, .nav a { transition: none; }
 }
+
+/* =========================================================
+   MOBILE: semua ukuran layar HP (portrait & landscape)
+   ========================================================= */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
+body { overflow-x: clip; }
+img, svg { max-width: 100%; }
+
+/* Tinggi layar dinamis (address bar HP naik-turun) */
+.hero { min-height: 100dvh; }
+
+/* Cover: boleh discroll kalau layar sangat pendek, tidak pernah terpotong */
+.cover { display: flex; overflow-y: auto; padding: calc(env(safe-area-inset-top, 0px) + 1rem) 1rem calc(env(safe-area-inset-bottom, 0px) + 1rem); }
+.cover-inner { margin: auto; width: min(100%, 23rem); }
+
+/* Target sentuh minimal ~44px */
+.btn { min-height: 2.75rem; }
+.nav a { display: inline-flex; align-items: center; min-height: 2.5rem; }
+.nav { max-width: calc(100% - 1rem); }
+
+/* HP umum (<= 600px) */
+@media (max-width: 600px) {
+  body { font-size: 1rem; }
+  .wrap { width: min(100% - 2rem, 62rem); }
+  .section { padding: 4rem 0; }
+  .section-title { margin-bottom: 2.25rem; }
+  .pair { gap: 3rem; }
+  .event { padding: 2rem 1rem; }
+  .event .actions .btn { flex: 1 1 100%; }
+  .grid { gap: .5rem; }
+  .closing { padding: 4.5rem 0 8rem; }
+  .ayat .rule { height: 3rem; margin-bottom: 2rem; }
+}
+
+/* HP kecil (<= 380px: iPhone SE, Android kecil) */
+@media (max-width: 380px) {
+  .cover-inner { padding: 3.5rem 1rem 2rem; }
+  .arch-frame { min-height: 26rem; padding: 4.5rem 1rem 2.25rem; }
+  .hero { padding: 3rem 1rem 5.5rem; gap: 2rem; }
+  .hero h1 { font-size: clamp(2.9rem, 16vw, 3.6rem); }
+  .hero .date { font-size: 1.3rem; }
+  .person h3 { font-size: 1.6rem; }
+  .nav a { padding: .5rem .6rem; font-size: .82rem; }
+  .count b { font-size: 1.7rem; }
+}
+
+/* HP pendek (<= 700px tinggi: layar kecil / browser dengan bilah panjang) */
+@media (max-height: 700px) {
+  .cover-inner { padding: 3rem 1.25rem 1.75rem; }
+  .cover .names { font-size: clamp(2.2rem, 10vw, 3rem); margin: .5rem 0 1rem; }
+  .guest { margin-bottom: 1rem; }
+  .guest strong { font-size: 1.35rem; }
+  .arch-frame { min-height: 24rem; padding-top: 4rem; }
+}
+
+/* HP posisi mendatar (landscape) */
+@media (max-height: 520px) and (orientation: landscape) {
+  .cover-inner { width: min(100%, 30rem); padding: 2rem 1.5rem 1.5rem; border-radius: 8rem 8rem 0 0; }
+  .cover-inner::after { border-radius: 8rem 8rem 0 0; }
+  .cover .names { display: flex; align-items: baseline; justify-content: center; gap: .5rem; font-size: 2.4rem; margin: .4rem 0 .8rem; }
+  .cover .names span { display: inline; }
+  .hero { min-height: auto; padding: 2.5rem 1.25rem 5rem; }
+  .arch-frame { min-height: 20rem; padding-top: 3rem; }
+  .nav { bottom: calc(env(safe-area-inset-bottom, 0px) + .5rem); }
+  .lightbox { padding: 3rem .5rem .5rem; }
+}
+
+/* Tablet & layar lebar: jaga agar tidak terlalu melebar */
+@media (min-width: 900px) {
+  .arch-frame { min-height: 34rem; }
+}
+
+/* =========================================================
+   ANTI-CROP FOTO
+   - Titik fokus di bagian ATAS foto (wajah biasanya di atas)
+   - Bingkai foto atas punya rasio tetap, jadi potongannya
+     sama di semua HP, bukan berubah-ubah mengikuti lebar layar
+   Atur fokus per foto lewat atribut style di index.html, contoh:
+   <div class="portrait photo" style="--pos: 50% 10%" ...>
+   (angka kedua kecil = fokus ke atas, besar = ke bawah)
+   ========================================================= */
+.photo { background-position: var(--pos, 50% 22%); }
+.photo.has { background-position: var(--pos, 50% 22%) !important; }
+
+.arch-frame { min-height: 0 !important; aspect-ratio: 4 / 6.2; }
+@media (max-height: 520px) and (orientation: landscape) {
+  .arch-frame { width: min(100%, 20rem); }
+}
+.portrait { aspect-ratio: 4 / 5; }
+.tile { aspect-ratio: 3 / 4; }
