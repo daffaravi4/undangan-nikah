@@ -110,24 +110,62 @@ pasangFoto(document.querySelector('[data-foto="hero"]'), CONFIG.foto.hero);
 pasangFoto(document.querySelector('[data-foto="wanita"]'), CONFIG.foto.wanita);
 pasangFoto(document.querySelector('[data-foto="pria"]'), CONFIG.foto.pria);
 
-// Galeri + tampilan layar penuh
-const lb = document.getElementById("lb"), lbImg = document.getElementById("lbImg");
-document.getElementById("grid").innerHTML = CONFIG.foto.galeri.map((_, i) =>
-  '<button type="button" class="photo tile" data-foto="g' + i + '" aria-label="Foto galeri ' + (i + 1) + '">'
-  + '<span class="ph"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg><em>Foto ' + (i + 1) + '</em></span></button>'
-).join("");
-CONFIG.foto.galeri.forEach((src, i) => {
-  const tile = document.querySelector('[data-foto="g' + i + '"]');
-  pasangFoto(tile, src);
-  tile.addEventListener("click", () => {
-    if (!tile.classList.contains("has")) return;
-    lbImg.style.backgroundImage = 'url("' + src + '")';
+// Galeri: kotak preview kecil (1 slot = 1 foto). Klik foto -> tampil besar dan bisa di-scroll ke bawah
+const lb = document.getElementById("lb"), lbFeed = document.getElementById("lbImg");
+const galeriBox = document.getElementById("grid");
+const lbClose = lb.querySelector(".lb-close");
+const lbCount = document.createElement("div");
+galeriBox.className = "galeri-grid";
+lbFeed.className = "lb-feed";
+lbCount.className = "lb-count";
+lb.appendChild(lbCount);
+
+Promise.all(CONFIG.foto.galeri.map(src => new Promise(res => {
+  const im = new Image();
+  im.onload = () => res({ src, w: im.naturalWidth, h: im.naturalHeight });
+  im.onerror = () => res(null);
+  im.src = src;
+}))).then(hasil => {
+  const ada = hasil.filter(Boolean);
+  if (!ada.length) {
+    galeriBox.innerHTML = '<p class="galeri-kosong">Foto galeri akan segera hadir.</p>';
+    return;
+  }
+  galeriBox.innerHTML = ada.map((f, i) =>
+    '<button type="button" class="thumb" data-i="' + i + '" aria-label="Buka foto ' + (i + 1) + '">'
+    + '<img src="' + esc(f.src) + '" alt="" loading="lazy" decoding="async"></button>'
+  ).join("");
+  lbFeed.innerHTML = ada.map((f, i) =>
+    '<img src="' + esc(f.src) + '" alt="Foto galeri ' + (i + 1) + '" width="' + f.w + '" height="' + f.h + '" decoding="async">'
+  ).join("");
+  const imgs = [...lbFeed.children];
+  let terakhir = null;
+
+  const updateCount = () => {
+    const batas = lb.scrollTop + 80;
+    let idx = imgs.findIndex(im => im.offsetTop + im.offsetHeight > batas);
+    if (idx < 0 || lb.scrollTop + lb.clientHeight >= lb.scrollHeight - 2) idx = imgs.length - 1;
+    lbCount.textContent = (idx + 1) + " / " + imgs.length;
+  };
+  const buka = i => {
+    terakhir = galeriBox.children[i];
     lb.hidden = false;
-  });
+    document.body.classList.add("viewing");
+    lb.scrollTop = Math.max(0, imgs[i].offsetTop - 64);
+    updateCount();
+    lbClose.focus();
+  };
+  const tutup = () => {
+    if (lb.hidden) return;
+    lb.hidden = true;
+    document.body.classList.remove("viewing");
+    if (terakhir) terakhir.focus();
+  };
+  galeriBox.querySelectorAll(".thumb").forEach(b => b.addEventListener("click", () => buka(Number(b.dataset.i))));
+  lb.addEventListener("scroll", updateCount, { passive: true });
+  lbClose.addEventListener("click", tutup);
+  document.addEventListener("keydown", e => { if (e.key === "Escape") tutup(); });
 });
-const tutup = () => { lb.hidden = true; };
-lb.addEventListener("click", tutup);
-document.addEventListener("keydown", e => { if (e.key === "Escape") tutup(); });
 
 // Penanda menu aktif
 const links = [...document.querySelectorAll(".nav a")];
