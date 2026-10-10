@@ -1,0 +1,11 @@
+Taruh foto di folder ini dengan nama berikut (format .jpg):
+
+  hero.jpg              foto berdua (tampil di bagian atas, bentuk lengkung)
+  mempelai-wanita.jpg   foto Delia
+  mempelai-pria.jpg     foto Ragil
+  galeri-1.jpg ... galeri-6.jpg   foto galeri
+
+Kalau nama file atau format berbeda (misalnya .png), ubah di bagian
+CONFIG.foto pada file script.js. Foto potret (tinggi) paling pas untuk
+foto mempelai. Sebaiknya kecilkan ukuran foto (maks. sekitar 300 KB)
+supaya undangan cepat dibuka.

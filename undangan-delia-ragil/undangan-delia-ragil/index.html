@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Undangan Pernikahan Rika &amp; Ragil</title>
+<meta name="description" content="Kami mengundang Anda ke pernikahan Delia dan Ragil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="locked">
+
+<!-- Cover -->
+<div class="cover" id="cover" role="dialog" aria-label="Pembuka undangan">
+  <div class="door l"></div>
+  <div class="door r"></div>
+  <div class="cover-inner">
+    <small>Undangan Pernikahan</small>
+    <h2 class="display names"><span>Rika</span><span class="amp">&amp;</span><span>Ragil</span></h2>
+    <div class="guest">
+      <small>Kepada Yth. Bapak/Ibu/Saudara/i</small>
+      <strong id="guestName">Tamu Undangan</strong>
+    </div>
+    <button class="btn" id="openBtn" type="button">Buka undangan</button>
+  </div>
+</div>
+
+<main>
+  <!-- Hero -->
+  <header class="hero" id="beranda">
+    <div class="arch-frame photo" data-foto="hero" role="img" aria-label="Foto Delia dan Ragil">
+      <p class="intro">Dengan penuh syukur, kami mengundang Anda ke pernikahan kami</p>
+      <h1 class="display"><span>Rika</span><span class="amp">&amp;</span><span>Ragil</span></h1>
+      <p class="date" data-bind="dateLong"></p>
+    </div>
+    <div class="count" id="count">
+      <div><b id="cd">00</b><span>hari</span></div>
+      <div><b id="ch">00</b><span>jam</span></div>
+      <div><b id="cm">00</b><span>menit</span></div>
+      <div><b id="cs">00</b><span>detik</span></div>
+    </div>
+  </header>
+
+  <!-- Ayat -->
+  <section class="section ayat">
+    <div class="wrap">
+      <div class="rule" aria-hidden="true"></div>
+      <p class="q">Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang.</p>
+      <p class="src">Q.S. Ar-Rum ayat 21</p>
+    </div>
+  </section>
+
+  <!-- Mempelai -->
+  <section class="section couple" id="mempelai">
+    <div class="wrap">
+      <h2 class="section-title">Mempelai</h2>
+      <div class="pair">
+        <article class="person a">
+          <div class="portrait photo" data-foto="wanita" role="img" aria-label="Foto Delia Rika Ananda">
+            <span class="ph"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><em>Foto mempelai wanita</em></span>
+          </div>
+          <h3>Delia Rika Ananda, S.Kep., Ners</h3>
+          <p>Putri pertama dari<br><b>Bapak Joko Santoso</b><br>dan <b>Ibu Ruri Firdayanti</b></p>
+        </article>
+        <article class="person b">
+          <div class="portrait photo" data-foto="pria" role="img" aria-label="Foto Pratu Muhammad Boy Ragil Saputro">
+            <span class="ph"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><em>Foto mempelai pria</em></span>
+          </div>
+          <h3>Pratu Muhammad Boy Ragil Saputro</h3>
+          <p>Putra dari<br><b>(Alm.) Bapak Paeman</b><br>dan <b>Ibu Sunarsih</b></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Acara -->
+  <section class="section" id="acara">
+    <div class="wrap">
+      <h2 class="section-title">Hari Bahagia</h2>
+      <div class="when">
+        <p class="day" data-bind="dateLong"></p>
+        <p>Kehadiran dan doa restu Anda adalah hadiah terindah bagi kami.</p>
+      </div>
+      <div class="events" id="events"></div>
+      <p class="note">Mohon hadir 15 menit lebih awal agar acara dapat dimulai tepat waktu.</p>
+    </div>
+  </section>
+
+  <!-- Galeri -->
+  <section class="section gallery" id="galeri">
+    <div class="wrap">
+      <h2 class="section-title">Galeri</h2>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- Penutup -->
+  <footer class="closing" id="penutup">
+    <div class="wrap">
+      <p class="lead">Merupakan kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
+      <p class="display names">Rika <i>&amp;</i> Ragil</p>
+      <p class="fam">beserta keluarga besar</p>
+      <p class="salam">Wassalamu'alaikum Wr. Wb.</p>
+    </div>
+  </footer>
+</main>
+
+<nav class="nav" aria-label="Navigasi undangan">
+  <a href="#beranda" class="on">Beranda</a>
+  <a href="#mempelai">Mempelai</a>
+  <a href="#acara">Acara</a>
+  <a href="#galeri">Galeri</a>
+</nav>
+
+<div class="lightbox" id="lb" hidden>
+  <button type="button" class="lb-close" aria-label="Tutup foto">Tutup</button>
+  <div class="lb-img" id="lbImg"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
